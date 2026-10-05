@@ -1,886 +1,712 @@
-:root{
-  --bg:#f7f8fc;
-  --ink:#151833;
-  --mut:#626982;
-  --blue:#315cff;
-  --blue-dark:#2448d8;
-  --mint:#19c58a;
-  --card:#ffffff;
-  --line:#e2e5ef;
-  --dark:#12162d;
-  --soft-blue:#eef2ff;
-  --danger:#d6336c;
-  --success:#0b7a56;
-}
+/* CheckSpeech AI - scripts:
+   idiomas, menu, demo do hero, preços,
+   cookies, formulário e reconhecimento de voz
+*/
 
-*{
-  box-sizing:border-box;
-  margin:0;
-}
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 
-body{
-  font-family:'Bricolage Grotesque',system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--ink);
-  line-height:1.6;
-}
 
-a{
-  color:inherit;
-}
+/* =========================================================
+   IDIOMAS
+   ========================================================= */
 
-:focus-visible{
-  outline:3px solid rgba(49,92,255,.35);
-  outline-offset:3px;
-}
+const T = {
 
-.wrap{
-  max-width:1100px;
-  margin:auto;
-  padding:0 20px;
-}
+  pt: {},
 
-section{
-  padding:78px 0;
-}
+  en: {
 
-h1{
-  font-size:clamp(2.3rem,5.5vw,4.2rem);
-  line-height:1.04;
-  font-weight:800;
-  letter-spacing:-.045em;
-}
+    n1:"Solutions",
+    n2:"Customers",
+    n3:"Pricing",
+    n4:"Contact",
 
-h2{
-  font-size:clamp(1.7rem,3.5vw,2.5rem);
-  line-height:1.12;
-  font-weight:800;
-  letter-spacing:-.035em;
-  margin-bottom:14px;
-}
+    h1:"Your voice becomes text. And becomes decisions.",
 
-p.lead{
-  color:var(--mut);
-  max-width:62ch;
-  font-size:1.08rem;
-}
+    lead:"Transcribe audio, caption live events, identify 52 languages and uncover the sentiment behind every statement. All by API, trained on over 500,000 hours of human-transcribed audio.",
 
-/* BOTÕES */
+    cta1:"Talk to us",
+    cta2:"See solutions",
 
-.btn{
-  display:inline-block;
-  background:var(--blue);
-  color:#fff;
-  border:1px solid var(--blue);
-  border-radius:10px;
-  padding:13px 24px;
-  font:600 1rem inherit;
-  font-family:inherit;
-  text-decoration:none;
-  cursor:pointer;
-  box-shadow:0 7px 18px rgba(49,92,255,.16);
-  transition:
-    background .2s ease,
-    border-color .2s ease,
-    box-shadow .2s ease;
-}
+    s1:"hours of audio",
+    s2:"languages",
 
-.btn:hover{
-  background:var(--blue-dark);
-  border-color:var(--blue-dark);
-  box-shadow:0 9px 22px rgba(49,92,255,.22);
-}
+    speech_tag:"LIVE TEST",
+    speech_title:"Turn your voice into text 🎙️",
+    speech_description:"Click the button, allow microphone access and speak. CheckSpeech AI will recognize your voice in real time.",
+    speech_start:"🎙️ Start speaking",
+    speech_stop:"⏹️ Stop",
+    speech_idle:'Click "Start speaking" to begin.',
+    speech_result_title:"Recognized text",
+    speech_placeholder:"Your text will appear here...",
+    speech_listening:"🎙️ Listening... speak now!",
+    speech_finished:"Speech recognition finished.",
+    speech_error:"We could not recognize your speech. Please try again.",
+    speech_permission:"⚠️ Microphone permission was blocked. Allow microphone access in your browser.",
+    speech_unsupported:"Your browser does not support speech recognition.",
 
-.btn:disabled{
-  background:#aeb7d6;
-  border-color:#aeb7d6;
-  cursor:not-allowed;
-  box-shadow:none;
-}
+    h_cl:"Who already uses CheckSpeech AI",
+    p_cl:"Education, health, media and support teams turn voice into data with us.",
 
-.btn.ghost{
-  background:transparent;
-  color:var(--ink);
-  border:1px solid #c8ccda;
-  box-shadow:none;
-}
+    h_sol:"Four solutions, one API",
+    p_sol:"Pick what you need. Tap each item for details.",
 
-.btn.ghost:hover{
-  background:#fff;
-  border-color:var(--ink);
-}
+    a1t:"Asynchronous audio transcription",
+    a1:"Transcription API for pre-recorded audio, at scale. Extract insights from meetings, calls and interviews with one of the best speech recognition engines in the world.",
 
-/* HEADER */
+    a2t:"Real-time transcription",
+    a2:"Live captions for talks and training sessions. They make content accessible and can be archived for later use.",
 
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:50;
-  background:rgba(247,248,252,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(226,229,239,.9);
-}
+    a3t:"Language identification",
+    a3:"Find out which language is spoken and gain global reach. Supports 52 languages.",
 
-nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:64px;
-  gap:12px;
-}
+    a4t:"Sentiment analysis",
+    a4:"Find the key moments in a speech, tell positive from negative and decide with confidence. Works with pre-recorded audio.",
 
-.logo{
-  font-weight:800;
-  font-size:1.25rem;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  gap:9px;
-  letter-spacing:-.02em;
-}
+    h_pr:"Pricing",
+    mes:"Monthly",
+    ano:"Yearly",
 
-.logo i{
-  display:inline-flex;
-  gap:3px;
-  align-items:center;
-  height:20px;
-}
+    p1:"Starter",
+    p2:"Business",
+    p3:"Enterprise",
+    sob:"Custom quote",
 
-.logo i b{
-  width:3px;
-  background:var(--blue);
-  border-radius:3px;
-}
+    ex:"extra minute",
 
-.menu{
-  display:flex;
-  gap:25px;
-  align-items:center;
-  list-style:none;
-  padding:0;
-}
+    e1:"Special prices for large volumes",
+    e2:"Priority technical support",
+    e3:"Dedicated account manager",
 
-.menu a{
-  text-decoration:none;
-  font-weight:600;
-  color:#343950;
-  transition:color .2s ease;
-}
+    cta3:"Request a quote",
 
-.menu a:hover{
-  color:var(--blue);
-}
+    h_ct:"Let's talk",
+    p_ct:"Tell us what you need and we'll reply within one business day.",
 
-select.lang{
-  font:inherit;
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:6px 9px;
-  background:#fff;
-  color:var(--ink);
-  cursor:pointer;
-}
+    l_n:"Name *",
+    l_e:"Email *",
+    l_t:"Phone",
+    l_p:"Country *",
+    sel:"Select",
+    l_m:"Message",
 
-#burger{
-  display:none;
-  background:none;
-  border:0;
-  font-size:1.6rem;
-  cursor:pointer;
-  color:var(--ink);
-}
+    l_c:"I agree to the Privacy Policy. *",
 
-/* HERO */
+    send:"Send",
 
-.hero{
-  padding-top:132px;
-  background:
-    radial-gradient(circle at 80% 20%,rgba(49,92,255,.10),transparent 28%),
-    linear-gradient(180deg,#edf2ff 0%,var(--bg) 100%);
-}
+    ok:"Message sent! We'll be in touch soon.",
 
-.hero .wrap{
-  display:grid;
-  grid-template-columns:1.1fr 1fr;
-  gap:48px;
-  align-items:center;
-}
+    rights:"© 2026 CheckSpeech AI. All rights reserved.",
 
-.hero h1{
-  max-width:700px;
-}
+    ck:"We use cookies to improve your experience. See our <a href='#contato'>Privacy Policy</a>.",
 
-.hero p.lead{
-  margin:22px 0 30px;
-  font-size:1.12rem;
-}
+    ckb:"Accept",
 
-.hero .row{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.stats{
-  display:flex;
-  gap:36px;
-  margin-top:38px;
-  flex-wrap:wrap;
-  color:var(--mut);
-}
-
-.stats span{
-  display:block;
-}
-
-.stats strong{
-  display:block;
-  color:var(--ink);
-  font-size:1.55rem;
-  line-height:1.1;
-  margin-bottom:3px;
-}
-
-/* DEMO */
-
-.demo{
-  background:
-    radial-gradient(circle at 80% 15%,rgba(49,92,255,.25),transparent 30%),
-    var(--dark);
-  color:#fff;
-  border-radius:20px;
-  padding:28px;
-  border:1px solid rgba(255,255,255,.06);
-  box-shadow:
-    0 24px 60px rgba(18,22,45,.18),
-    0 5px 15px rgba(18,22,45,.08);
-}
-
-.wave{
-  display:flex;
-  align-items:center;
-  gap:3px;
-  height:82px;
-}
-
-.wave b{
-  flex:1;
-  background:var(--mint);
-  border-radius:4px;
-  height:20%;
-  animation:w 1.1s ease-in-out infinite;
-}
-
-@keyframes w{
-  50%{
-    height:100%;
+    m_req:"Required field",
+    m_mail:"Enter a valid email",
+    m_tel:"Enter a valid phone number",
+    m_cap:"Wrong answer"
   }
+
+};
+
+
+/* Guarda os textos originais em português */
+
+$$('[data-i]').forEach(el => {
+
+  T.pt[el.dataset.i] ??= el.innerHTML;
+
+});
+
+
+Object.assign(T.pt, {
+
+  m_req:"Campo obrigatório",
+  m_mail:"Informe um e-mail válido",
+  m_tel:"Informe um telefone válido",
+  m_cap:"Resposta incorreta"
+
+});
+
+
+let L = 'pt';
+
+
+function setLang(l){
+
+  L = l;
+
+  document.documentElement.lang =
+    l === 'pt' ? 'pt-BR' : 'en';
+
+  $$('[data-i]').forEach(el => {
+
+    const v = T[l][el.dataset.i];
+
+    if(v){
+      el.innerHTML = v;
+    }
+
+  });
+
+  priceUpd();
+
+  $('#lang').value = l;
+
+  try{
+    localStorage.lang = l;
+  }catch(e){}
+
 }
 
-.demo q{
-  display:block;
-  margin:18px 0;
-  font-size:1.05rem;
-  min-height:3.2em;
-  quotes:none;
-  color:#f6f7ff;
+
+$('#lang').onchange = e => setLang(e.target.value);
+
+
+/* =========================================================
+   MENU MOBILE
+   ========================================================= */
+
+$('#burger').onclick = () => {
+
+  const o = $('#menu').classList.toggle('open');
+
+  $('#burger').setAttribute(
+    'aria-expanded',
+    o
+  );
+
+};
+
+
+$$('#menu a').forEach(a => {
+
+  a.onclick = () => {
+    $('#menu').classList.remove('open');
+  };
+
+});
+
+
+/* =========================================================
+   HERO DEMO
+   ========================================================= */
+
+const w = $('#wave');
+
+
+for(let i = 0; i < 40; i++){
+
+  const b = document.createElement('b');
+
+  b.style.animationDelay =
+    (i * .07) % 1.1 + 's';
+
+  b.style.animationDuration =
+    (.7 + Math.random() * .8) + 's';
+
+  w.appendChild(b);
+
 }
 
-.chip{
-  display:inline-block;
-  padding:5px 12px;
-  border-radius:99px;
-  background:var(--mint);
-  color:#05261c;
-  font-weight:600;
-  font-size:.85rem;
+
+const D = [
+
+  [
+    "Adorei o atendimento, resolveram tudo rápido!",
+    "😊 Positivo · pt-BR"
+  ],
+
+  [
+    "I've been waiting for an hour and nobody answered.",
+    "😠 Negative · en"
+  ],
+
+  [
+    "Gracias, el producto llegó bien.",
+    "🙂 Positivo · es"
+  ]
+
+];
+
+
+let k = 0;
+
+
+function demo(){
+
+  const [t,c] = D[k++ % 3];
+
+  let i = 0;
+
+  $('#chip').textContent = c;
+  $('#tx').textContent = '';
+
+  const id = setInterval(() => {
+
+    $('#tx').textContent =
+      t.slice(0, ++i);
+
+    if(i >= t.length){
+
+      clearInterval(id);
+
+      setTimeout(
+        demo,
+        2200
+      );
+
+    }
+
+  },35);
+
+}
+
+
+demo();
+
+
+/* =========================================================
+   PREÇOS
+   ========================================================= */
+
+let annual = false;
+
+
+function priceUpd(){
+
+  $$('.price[data-m]').forEach(p => {
+
+    p.textContent =
+      annual
+        ? p.dataset.a
+        : p.dataset.m;
+
+  });
+
+  $('#bm').classList.toggle(
+    'on',
+    !annual
+  );
+
+  $('#ba').classList.toggle(
+    'on',
+    annual
+  );
+
+}
+
+
+$('#bm').onclick = () => {
+
+  annual = false;
+
+  priceUpd();
+
+};
+
+
+$('#ba').onclick = () => {
+
+  annual = true;
+
+  priceUpd();
+
+};
+
+
+/* =========================================================
+   COOKIES
+   ========================================================= */
+
+try{
+
+  if(!localStorage.ck){
+
+    $('#ck').style.display = 'flex';
+
+  }
+
+}catch(e){
+
+  $('#ck').style.display = 'flex';
+
+}
+
+
+$('#ckb').onclick = () => {
+
+  $('#ck').style.display = 'none';
+
+  try{
+    localStorage.ck = 1;
+  }catch(e){}
+
+};
+
+
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
+
+const a =
+  1 + Math.floor(Math.random() * 9);
+
+const b =
+  1 + Math.floor(Math.random() * 9);
+
+
+$('#cq').textContent =
+  `Captcha: ${a} + ${b} = ? *`;
+
+
+$('#c').onclick = () => {
+
+  $('#send').disabled = false;
+
+};
+
+
+$('#t').oninput = e => {
+
+  let v = e.target.value;
+
+  if(v.trim().startsWith('+')){
+
+    e.target.value =
+      '+' +
+      v
+        .replace(/[^\d ]/g,'')
+        .replace(/^ /,'')
+        .slice(0,20);
+
+  }else{
+
+    let d =
+      v.replace(/\D/g,'').slice(0,11);
+
+    e.target.value =
+      d.length > 10
+        ? d.replace(
+            /(\d\d)(\d{5})(\d{0,4})/,
+            '($1) $2-$3'
+          )
+        : d.length > 6
+        ? d.replace(
+            /(\d\d)(\d{4})(\d{0,4})/,
+            '($1) $2-$3'
+          )
+        : d.length > 2
+        ? d.replace(
+            /(\d\d)(\d*)/,
+            '($1) $2'
+          )
+        : d;
+
+  }
+
+};
+
+
+function bad(el,key){
+
+  el.classList.toggle(
+    'bad',
+    !!key
+  );
+
+  el.parentNode.querySelector(
+    '.err'
+  ).textContent =
+    key ? T[L][key] : '';
+
+  return !!key;
+
+}
+
+
+$('#f').onsubmit = ev => {
+
+  ev.preventDefault();
+
+  const n = $('#n');
+  const e = $('#e');
+  const t = $('#t');
+  const p = $('#p');
+  const cap = $('#cap');
+
+  let err = false;
+
+
+  err =
+    bad(
+      n,
+      n.value.trim().length < 2
+        ? 'm_req'
+        : ''
+    ) || err;
+
+
+  err =
+    bad(
+      e,
+      !e.value.trim()
+        ? 'm_req'
+        : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e.value)
+        ? 'm_mail'
+        : ''
+    ) || err;
+
+
+  const dg =
+    t.value.replace(/\D/g,'').length;
+
+
+  err =
+    bad(
+      t,
+      t.value &&
+      (dg < 8 || dg > 15)
+        ? 'm_tel'
+        : ''
+    ) || err;
+
+
+  err =
+    bad(
+      p,
+      !p.value
+        ? 'm_req'
+        : ''
+    ) || err;
+
+
+  err =
+    bad(
+      cap,
+      +cap.value !== a + b
+        ? 'm_cap'
+        : ''
+    ) || err;
+
+
+  if(
+    err ||
+    !$('#c').checked
+  ){
+    return;
+  }
+
+
+  $('#ok').style.display =
+    'block';
+
+  $('#f').reset();
+
+  $('#send').disabled =
+    true;
+
+};
+
+
+/* =========================================================
+   RECONHECIMENTO DE VOZ
+   Web Speech API
+   ========================================================= */
+
+const startSpeech =
+  $('#startSpeech');
+
+const stopSpeech =
+  $('#stopSpeech');
+
+const speechText =
+  $('#speechText');
+
+const speechStatus =
+  $('#speechStatus');
+
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+
+if(!SpeechRecognition){
+
+  speechStatus.textContent =
+    T[L].speech_unsupported;
+
+  startSpeech.disabled = true;
+
+}else{
+
+  const recognition =
+    new SpeechRecognition();
+
+
+  recognition.lang =
+    L === 'pt'
+      ? 'pt-BR'
+      : 'en-US';
+
+
+  recognition.continuous = true;
+
+  recognition.interimResults = true;
+
+
+  let finalTranscript = '';
+
+
+  recognition.onstart = () => {
+
+    speechStatus.textContent =
+      T[L].speech_listening;
+
+    startSpeech.disabled = true;
+
+    stopSpeech.disabled = false;
+
+    startSpeech.classList.add(
+      'listening'
+    );
+
+    startSpeech.textContent =
+      L === 'pt'
+        ? '🎙️ Ouvindo...'
+        : '🎙️ Listening...';
+
+  };
+
+
+  recognition.onresult = event => {
+
+    let interimTranscript = '';
+
+
+    for(
+      let i = event.resultIndex;
+      i < event.results.length;
+      i++
+    ){
+
+      const transcript =
+        event.results[i][0].transcript;
+
+
+      if(
+        event.results[i].isFinal
+      ){
+
+        finalTranscript +=
+          transcript + ' ';
+
+      }else{
+
+        interimTranscript +=
+          transcript;
+
+      }
+
+    }
+
+
+    speechText.textContent =
+      finalTranscript +
+      interimTranscript;
+
+  };
+
+
+  recognition.onerror = event => {
+
+    if(
+      event.error === 'not-allowed'
+    ){
+
+      speechStatus.textContent =
+        T[L].speech_permission;
+
+    }else{
+
+      speechStatus.textContent =
+        T[L].speech_error;
+
+    }
+
+  };
+
+
+  recognition.onend = () => {
+
+    speechStatus.textContent =
+      T[L].speech_finished;
+
+    startSpeech.disabled = false;
+
+    stopSpeech.disabled = true;
+
+    startSpeech.classList.remove(
+      'listening'
+    );
+
+    startSpeech.textContent =
+      T[L].speech_start;
+
+  };
+
+
+  startSpeech.onclick = () => {
+
+    finalTranscript = '';
+
+    speechText.textContent =
+      T[L].speech_placeholder;
+
+    try{
+
+      recognition.lang =
+        L === 'pt'
+          ? 'pt-BR'
+          : 'en-US';
+
+      recognition.start();
+
+    }catch(error){
+
+      console.log(
+        'Reconhecimento já iniciado.'
+      );
+
+    }
+
+  };
+
+
+  stopSpeech.onclick = () => {
+
+    recognition.stop();
+
+  };
+
 }
 
 
 /* =========================================================
-   TESTE DE VOZ - NOVA FUNCIONALIDADE
+   IDIOMA SALVO
    ========================================================= */
 
-.speech-section{
-  background:
-    linear-gradient(
-      180deg,
-      var(--bg) 0%,
-      #eef2ff 100%
+try{
+
+  if(localStorage.lang){
+
+    setLang(
+      localStorage.lang
     );
-}
 
-.speech-section .wrap{
-  text-align:center;
-}
-
-.speech-tag{
-  display:inline-block;
-  color:var(--blue);
-  font-size:.8rem;
-  font-weight:800;
-  letter-spacing:.12em;
-  margin-bottom:12px;
-}
-
-.speech-lead{
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.speech-card{
-  max-width:760px;
-  margin:30px auto 0;
-  padding:30px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  box-shadow:0 12px 35px rgba(21,24,51,.055);
-}
-
-.speech-controls{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.speech-status{
-  margin:22px 0;
-  color:var(--mut);
-  font-weight:600;
-  min-height:28px;
-}
-
-.speech-result{
-  margin-top:20px;
-  padding:22px;
-  background:var(--soft-blue);
-  border-radius:14px;
-  text-align:left;
-}
-
-.speech-result h3{
-  margin-bottom:8px;
-  font-size:1.05rem;
-}
-
-#speechText{
-  color:var(--ink);
-  min-height:50px;
-  line-height:1.7;
-}
-
-#startSpeech.listening{
-  background:var(--mint);
-  border-color:var(--mint);
-  color:#05261c;
-}
-
-
-/* CLIENTES */
-
-.logos{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:16px;
-  margin-top:30px;
-}
-
-.logos div{
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#fff;
-  padding:22px 18px;
-  text-align:center;
-  font-weight:800;
-  font-size:1.1rem;
-  color:#5b6080;
-  box-shadow:0 5px 18px rgba(21,24,51,.035);
-  transition:
-    border-color .2s ease,
-    box-shadow .2s ease;
-}
-
-.logos div:hover{
-  border-color:#cbd3f3;
-  box-shadow:0 9px 25px rgba(21,24,51,.07);
-}
-
-.logos span{
-  color:var(--blue);
-}
-
-/* SOLUÇÕES */
-
-.acc{
-  margin-top:30px;
-  display:grid;
-  gap:12px;
-}
-
-.acc details{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:0 22px;
-  box-shadow:0 5px 18px rgba(21,24,51,.025);
-  transition:
-    border-color .2s ease,
-    box-shadow .2s ease;
-}
-
-.acc details:hover{
-  border-color:#cfd5e7;
-  box-shadow:0 8px 24px rgba(21,24,51,.05);
-}
-
-.acc summary{
-  cursor:pointer;
-  font-weight:700;
-  font-size:1.08rem;
-  padding:19px 0;
-  list-style:none;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-}
-
-.acc summary::after{
-  content:"+";
-  font-size:1.5rem;
-  line-height:1;
-  color:var(--blue);
-  transition:transform .25s ease;
-}
-
-.acc details[open] summary::after{
-  transform:rotate(45deg);
-}
-
-.acc p{
-  padding-bottom:20px;
-  color:var(--mut);
-  max-width:70ch;
-}
-
-/* PREÇOS */
-
-#precos{
-  background:#fff;
-}
-
-.toggle{
-  display:inline-flex;
-  border:1px solid #cfd4e3;
-  border-radius:99px;
-  margin:22px 0;
-  overflow:hidden;
-  padding:3px;
-  background:#f6f7fb;
-}
-
-.toggle button{
-  border:0;
-  background:none;
-  color:var(--mut);
-  font:600 .95rem inherit;
-  font-family:inherit;
-  padding:8px 20px;
-  border-radius:99px;
-  cursor:pointer;
-  transition:
-    background .2s ease,
-    color .2s ease;
-}
-
-.toggle .on{
-  background:var(--ink);
-  color:#fff;
-}
-
-.tw{
-  overflow-x:auto;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:#fff;
-  box-shadow:0 10px 30px rgba(21,24,51,.05);
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:680px;
-}
-
-th,
-td{
-  padding:17px;
-  border-bottom:1px solid var(--line);
-  text-align:left;
-  vertical-align:top;
-}
-
-th{
-  font-size:1.05rem;
-  background:#fbfcff;
-}
-
-th:first-child{
-  border-radius:15px 0 0 0;
-}
-
-.price{
-  font-size:1.8rem;
-  font-weight:800;
-  display:block;
-  margin-top:4px;
-  letter-spacing:-.025em;
-}
-
-td small{
-  display:block;
-  color:var(--mut);
-  margin-top:3px;
-}
-
-th.hl,
-td.hl{
-  background:var(--soft-blue);
-}
-
-tbody tr:last-child td{
-  border-bottom:0;
-}
-
-/* CONTATO */
-
-#contato{
-  background:#fff;
-}
-
-form{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:30px;
-  display:grid;
-  gap:17px;
-  max-width:640px;
-  margin-top:26px;
-  box-shadow:0 12px 35px rgba(21,24,51,.055);
-}
-
-label{
-  font-weight:600;
-  display:grid;
-  gap:7px;
-}
-
-input,
-select,
-textarea{
-  font:inherit;
-  padding:12px 13px;
-  border:1px solid #c7ccdb;
-  border-radius:9px;
-  width:100%;
-  background:#fff;
-  color:var(--ink);
-  transition:
-    border-color .2s ease,
-    box-shadow .2s ease;
-}
-
-input::placeholder,
-textarea::placeholder{
-  color:#9298aa;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  outline:none;
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(49,92,255,.10);
-}
-
-input.bad,
-select.bad,
-textarea.bad{
-  border-color:var(--danger);
-}
-
-.err{
-  color:var(--danger);
-  font-weight:400;
-  font-size:.85rem;
-  min-height:1em;
-}
-
-.consent{
-  display:flex;
-  gap:10px;
-  align-items:flex-start;
-  font-weight:400;
-}
-
-.consent input{
-  width:auto;
-  margin-top:5px;
-}
-
-#ok{
-  display:none;
-  color:var(--success);
-  font-weight:600;
-}
-
-/* FOOTER */
-
-footer{
-  background:var(--dark);
-  color:#cfd4f0;
-  padding:44px 0;
-}
-
-footer .wrap{
-  display:flex;
-  flex-wrap:wrap;
-  gap:25px;
-  justify-content:space-between;
-  align-items:center;
-}
-
-footer strong{
-  color:#fff;
-  font-size:1.05rem;
-}
-
-footer small{
-  color:#9299b8;
-}
-
-footer ul{
-  display:flex;
-  gap:20px;
-  list-style:none;
-  padding:0;
-  flex-wrap:wrap;
-}
-
-footer ul a{
-  text-decoration:none;
-  transition:color .2s ease;
-}
-
-footer ul a:hover{
-  color:#fff;
-}
-
-.soc{
-  display:flex;
-  gap:10px;
-}
-
-.soc a{
-  width:38px;
-  height:38px;
-  border:1px solid #41486f;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  transition:
-    background .2s ease,
-    border-color .2s ease;
-}
-
-.soc a:hover{
-  background:#252b4a;
-  border-color:#68719e;
-}
-
-.soc svg{
-  width:18px;
-  height:18px;
-  fill:#fff;
-}
-
-/* COOKIES */
-
-#ck{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:var(--dark);
-  color:#fff;
-  padding:16px 20px;
-  z-index:60;
-  display:none;
-  gap:16px;
-  align-items:center;
-  justify-content:center;
-  flex-wrap:wrap;
-  border-top:1px solid #292f50;
-  box-shadow:0 -8px 25px rgba(18,22,45,.12);
-}
-
-#ck a{
-  color:#9db4ff;
-}
-
-/* RESPONSIVO */
-
-@media(max-width:820px){
-
-  .hero .wrap{
-    grid-template-columns:1fr;
-    gap:35px;
   }
 
-  #burger{
-    display:block;
-  }
-
-  .menu{
-    display:none;
-    position:absolute;
-    top:64px;
-    left:0;
-    right:0;
-    background:var(--bg);
-    flex-direction:column;
-    align-items:stretch;
-    padding:20px;
-    border-bottom:1px solid var(--line);
-    box-shadow:0 12px 25px rgba(21,24,51,.08);
-  }
-
-  .menu.open{
-    display:flex;
-  }
-
-  .menu li{
-    width:100%;
-  }
-
-  .menu a{
-    display:block;
-    padding:7px 0;
-  }
-
-  .menu .lang{
-    width:100%;
-  }
-
-  section{
-    padding:58px 0;
-  }
-
-  .hero{
-    padding-top:112px;
-  }
-
-  .stats{
-    gap:25px;
-  }
-
-  form{
-    padding:23px;
-  }
-
-  .speech-card{
-    padding:24px;
-  }
-
-}
-
-@media(max-width:520px){
-
-  .wrap{
-    padding:0 16px;
-  }
-
-  h1{
-    font-size:2.35rem;
-  }
-
-  .hero p.lead{
-    font-size:1rem;
-  }
-
-  .demo{
-    padding:20px;
-  }
-
-  .wave{
-    height:65px;
-  }
-
-  .row .btn{
-    width:100%;
-    text-align:center;
-  }
-
-  .logos{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .logos div{
-    padding:18px 10px;
-    font-size:1rem;
-  }
-
-  .acc details{
-    padding:0 17px;
-  }
-
-  .acc summary{
-    font-size:1rem;
-  }
-
-  .price{
-    font-size:1.5rem;
-  }
-
-  footer .wrap{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .speech-card{
-    padding:20px;
-  }
-
-  .speech-controls{
-    flex-direction:column;
-  }
-
-  .speech-controls .btn{
-    width:100%;
-  }
-
-}
-
-@media(prefers-reduced-motion:reduce){
-
-  .wave b{
-    animation:none;
-    height:50%;
-  }
-
-  .btn,
-  .logos div,
-  .acc details,
-  .soc a,
-  input,
-  select,
-  textarea{
-    transition:none;
-  }
-
-}
+}catch(e){}
