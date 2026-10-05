@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CheckSpeech AI – Fala em texto e sentimento por API</title>
+<meta name="description" content="APIs de transcrição de fala, identificação de idiomas e análise de sentimento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Principal">
+ <a class="logo" href="#" aria-label="CheckSpeech AI"><i aria-hidden="true"><b style="height:8px"></b><b style="height:18px"></b><b style="height:12px"></b><b style="height:20px"></b></i>CheckSpeech AI</a>
+ <button id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+ <ul class="menu" id="menu">
+  <li><a href="#solucoes" data-i="n1">Soluções</a></li>
+  <li><a href="#clientes" data-i="n2">Clientes</a></li>
+  <li><a href="#precos" data-i="n3">Preços</a></li>
+  <li><a href="#contato" data-i="n4">Contato</a></li>
+  <li><select class="lang" id="lang" aria-label="Idioma"><option value="pt">PT</option><option value="en">EN</option></select></li>
+ </ul></nav></div></header>
+
+<main>
+<section class="hero"><div class="wrap">
+ <div>
+  <h1 data-i="h1">Sua voz vira texto. E vira decisão.</h1>
+  <p class="lead" data-i="lead">Transcreva áudios, gere legendas ao vivo, identifique 52 idiomas e descubra o sentimento por trás de cada fala. Tudo por API, treinada em mais de 500.000 horas de áudio transcritas por humanos.</p>
+  <div class="row"><a class="btn" href="#contato" data-i="cta1">Fale com a gente</a><a class="btn ghost" href="#solucoes" data-i="cta2">Ver soluções</a></div>
+  <div class="stats"><span><strong>500 mil+</strong><span data-i="s1">horas de áudio</span></span><span><strong>52</strong><span data-i="s2">idiomas</span></span></div>
+ </div>
+ <div class="demo" aria-hidden="true">
+  <div class="wave" id="wave"></div>
+  <q id="tx"></q>
+  <span class="chip" id="chip"></span>
+ </div>
+</div></section>
+
+<section id="clientes"><div class="wrap">
+ <h2 data-i="h_cl">Quem já usa o CheckSpeech AI</h2>
+ <p class="lead" data-i="p_cl">Empresas de educação, saúde, mídia e atendimento transformam voz em dados com a gente.</p>
+ <div class="logos"><div>Voxa<span>Lab</span></div><div>Clínica<span>Onda</span></div><div>Tele<span>Mais</span></div><div>Edu<span>Pulse</span></div><div>Radio<span>Norte</span></div><div>Lume<span>Care</span></div></div>
+</div></section>
+
+<section id="solucoes" style="background:#fff"><div class="wrap">
+ <h2 data-i="h_sol">Quatro soluções, uma API</h2>
+ <p class="lead" data-i="p_sol">Escolha o que precisa. Toque em cada item para ver os detalhes.</p>
+ <div class="acc">
+  <details open><summary data-i="a1t">Transcrição de áudio assíncrono</summary><p data-i="a1">API de transcrição para áudios pré-gravados, em escala. Extraia informações de reuniões, ligações e entrevistas com um dos melhores motores de reconhecimento de fala do mundo.</p></details>
+  <details><summary data-i="a2t">Transcrição em tempo real</summary><p data-i="a2">Legendas ao vivo para palestras e treinamentos. Elas deixam o conteúdo acessível e podem ser arquivadas para uso futuro.</p></details>
+  <details><summary data-i="a3t">Identificação de idiomas</summary><p data-i="a3">Descubra qual idioma está sendo falado e ganhe alcance global. Suporte a 52 idiomas.</p></details>
+  <details><summary data-i="a4t">Análise de sentimento</summary><p data-i="a4">Encontre os momentos mais importantes de uma fala, separe o que é positivo do que é negativo e decida com mais segurança. Funciona com áudios pré-gravados.</p></details>
+ </div>
+</div></section>
+
+<section id="precos"><div class="wrap">
+ <h2 data-i="h_pr">Preços</h2>
+ <div class="toggle" role="group"><button id="bm" class="on" data-i="mes">Mensal</button><button id="ba" data-i="ano">Anual</button></div>
+ <div class="tw"><table>
+  <thead><tr><th></th>
+   <th><span data-i="p1">Iniciante</span><span class="price" data-m="R$ 29/mês" data-a="R$ 328/ano">R$ 29/mês</span></th>
+   <th class="hl"><span data-i="p2">Negócio</span><span class="price" data-m="R$ 44/mês" data-a="R$ 499/ano">R$ 44/mês</span></th>
+   <th><span data-i="p3">Empreendimento</span><span class="price" data-i="sob">Sob consulta</span></th></tr></thead>
+  <tbody>
+   <tr><td data-i="a1t">Transcrição de áudio assíncrono</td><td>120 min<small>R$ 0,20 / <span data-i="ex">min excedente</span></small></td><td class="hl">200 min<small>R$ 0,15 / <span data-i="ex">min excedente</span></small></td><td rowspan="4"><ul style="padding-left:18px"><li data-i="e1">Preços especiais para grandes volumes</li><li data-i="e2">Prioridade no suporte técnico</li><li data-i="e3">Gestor de conta dedicado</li></ul><a class="btn" style="margin-top:14px" href="#contato" data-i="cta3">Solicitar proposta</a></td></tr>
+   <tr><td data-i="a2t">Transcrição em tempo real</td><td>90 min<small>R$ 0,40 / <span data-i="ex">min excedente</span></small></td><td class="hl">120 min<small>R$ 0,40 / <span data-i="ex">min excedente</span></small></td></tr>
+   <tr><td data-i="a3t">Identificação de idiomas</td><td>200 min<small>R$ 0,05 / <span data-i="ex">min excedente</span></small></td><td class="hl">500 min<small>R$ 0,03 / <span data-i="ex">min excedente</span></small></td></tr>
+   <tr><td data-i="a4t">Análise de sentimento</td><td>120 min<small>R$ 0,40 / <span data-i="ex">min excedente</span></small></td><td class="hl">200 min<small>R$ 0,35 / <span data-i="ex">min excedente</span></small></td></tr>
+  </tbody></table></div>
+</div></section>
+
+<section id="contato" style="background:#fff"><div class="wrap">
+ <h2 data-i="h_ct">Vamos conversar</h2>
+ <p class="lead" data-i="p_ct">Conte o que você precisa e respondemos em até um dia útil.</p>
+ <form id="f" novalidate>
+  <label><span data-i="l_n">Nome *</span><input id="n" autocomplete="name" required><span class="err"></span></label>
+  <label><span data-i="l_e">E-mail *</span><input id="e" type="email" autocomplete="email" required><span class="err"></span></label>
+  <label><span data-i="l_t">Telefone</span><input id="t" type="tel" autocomplete="tel" placeholder="(31) 91234-5678 ou +1 555 123 4567"><span class="err"></span></label>
+  <label><span data-i="l_p">País *</span><select id="p" required><option value="" data-i="sel">Selecione</option><option>Brasil</option><option>Portugal</option><option>Estados Unidos</option><option>Argentina</option><option>México</option><option>Espanha</option><option>Reino Unido</option><option>Outro</option></select><span class="err"></span></label>
+  <label><span data-i="l_m">Mensagem</span><textarea id="m" rows="4"></textarea></label>
+  <label class="consent"><input type="radio" id="c" name="c"><span data-i="l_c">Eu concordo com a Política de Privacidade. *</span></label>
+  <label><span id="cq"></span><input id="cap" inputmode="numeric" required aria-label="Captcha"><span class="err"></span></label>
+  <button class="btn" id="send" disabled data-i="send">Enviar</button>
+  <p id="ok" role="status" data-i="ok">Mensagem enviada! Entraremos em contato em breve.</p>
+ </form>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+ <div><strong>CheckSpeech AI</strong><br><small data-i="rights">© 2026 CheckSpeech AI. Todos os direitos reservados.</small></div>
+ <ul><li><a href="#solucoes" data-i="n1">Soluções</a></li><li><a href="#clientes" data-i="n2">Clientes</a></li><li><a href="#precos" data-i="n3">Preços</a></li><li><a href="#contato" data-i="n4">Contato</a></li></ul>
+ <div class="soc">
+  <a href="https://www.linkedin.com/login" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4 3a2 2 0 100 4 2 2 0 000-4zM2 9h4v12H2zM9 9h4v2c.7-1.2 2-2.2 4-2.2 4 0 5 2.600 5 6V21h-4v-5.500c0-1.500-.3-3-2-3s-3 1.200-3 3V21H9z"/></svg></a>
+  <a href="https://www.instagram.com/accounts/login/" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm5.500-3a1 1 0 110 2 1 1 0 010-2z"/></svg></a>
+  <a href="https://x.com/i/flow/login" aria-label="X"><svg viewBox="0 0 24 24"><path d="M3 3h5l4.500 6L18 3h3l-7 8 8 10h-5l-5-6.500L5.500 21H3l7.500-8.500z"/></svg></a>
+ </div>
+</div></footer>
+
+<div id="ck" role="dialog" aria-label="Cookies"><span data-i="ck">Usamos cookies para melhorar sua experiência. Veja nossa <a href="#contato">Política de Privacidade</a>.</span><button class="btn" id="ckb" data-i="ckb">Aceitar</button></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
